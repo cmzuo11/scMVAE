@@ -194,25 +194,6 @@ def normalize( adata, filter_min_counts = True, size_factors = False,
 
 	return adata
 
-def calculate_ARI( File1, File2 ):
-	
-	### here File1 is the cell info, File2 is the predited group
-	Data1 = pd.read_csv( File1, header=0, index_col=0 )
-	## preprocessing for latter evaluation
-	group = Data1['Group'].values
-	label_ground_truth = []
-	for g in group:
-		g = int(g.split('Group')[1])
-		label_ground_truth.append(g)
-		
-	Data1 = pd.read_csv( File2, header=0, index_col=0, sep = "\t" )
-	
-	pre_group = Data1.values[:,0]
-	
-	ARI_pred = round( metrics.adjusted_rand_score( pre_group, label_ground_truth ), 3 )
-	
-	return ARI_pred
-
 def calculate_log_library_size( Dataset ):
 	
 	### Dataset is raw read counts, and should be cells * features
@@ -264,20 +245,14 @@ def getFinalResult( Result, Result1, Mode = 0 ):
 	return latent_temp, norm_x1_temp, recon_x1_temp, recon_x2_temp
 
 
-def save_checkpoint(state, folder='./saved_model/', filename='model_best.pth.tar'):
+def save_checkpoint( model, fileName = 'model_best.pth.tar'):
 
-	if not os.path.isdir(folder):
-
-		os.mkdir(folder)
-
-	torch.save(state, os.path.join(folder, filename))
+	torch.save( model.state_dict(), fileName )
 
 
 def load_checkpoint(file_path, model, device):
 
-	checkpoint = torch.load(file_path)
-	model.load_state_dict(checkpoint['model_state_dict'])
-
+	model.load_state_dict( torch.load(file_path) )
 	model.to(device)
 
 	return model

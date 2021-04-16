@@ -171,17 +171,6 @@ def train(args, adata, adata1, model, train_index, test_index, lib_mean, lib_var
 		norm_x1_1    = pd.DataFrame( norm_x1, columns =  adata.var_names, 
 									 index= adata.obs_names ).to_csv( os.path.join( args.outdir,
 									 str(file_fla) + '_scRNA_norm_ZINB_final.csv' ) )
-
-	if recon_x1 is not None:
-		recon_x1_1   = pd.DataFrame( recon_x1, columns =  adata.var_names, 
-								  index= adata.obs_names ).to_csv( os.path.join( args.outdir,
-								  str(file_fla) + '_scRNA_recon_ZINB_final.csv' ) )
-
-	if recon_x_2 is not None:
-		recon_x2_1   = pd.DataFrame( recon_x_2, columns =  adata1.var_names, 
-								 index= adata1.obs_names ).to_csv( os.path.join( args.outdir, 
-								 str(file_fla)+ '_scATAC_recon_ZINB_final.csv') )
-
 	if norm_x2 is not None:
 		norm_x2_1   = pd.DataFrame( norm_x2, columns =  adata1.var_names, 
 									index= adata1.obs_names ).to_csv( os.path.join( args.outdir, 

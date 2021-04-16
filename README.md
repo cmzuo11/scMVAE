@@ -17,6 +17,6 @@ scMVAE is implemented in the Pytorch framework. Please run scMVAE on CUDA if pos
 
 the detailed usage for using scMVAE-PoE model, please check the 'MVAE_test_Adbrain.py'
 
-# Citation:
+# Citation
 
 Chunman Zuo, Luonan Chen. Deep-joint-learning analysis model of single cell transcriptome and open chromatin accessibility data. Briefings in Bioinformatics. 2020.(accept)

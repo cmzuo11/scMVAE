@@ -236,11 +236,11 @@ def train_with_argas( args ):
 		                  hidden_5        = 1024, 
 		                  drop_rate       = 0.1, 
 		                  log_variational = True,
-					      Type            = "ZINB", 
-					      device          = device, 
-					      n_centroids     = 22, 
-					      penality        = "GMM",
-					      model           = 1,  )
+			          Type            = "ZINB", 
+			          device          = device, 
+			          n_centroids     = 22, 
+				  penality        = "GMM",
+			          model           = 1,  )
 
 	args.lr           = 0.001
 	args.anneal_epoch = 200

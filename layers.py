@@ -1,8 +1,6 @@
-#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct 30 11:39:39 2019
-
 @author: chunmanzuo
 """
 
@@ -15,7 +13,6 @@ from torch.autograd import Variable
 
 def build_multi_layers(layers, use_batch_norm=True, dropout_rate = 0.1 ):
     """Build multilayer linear perceptron"""
-    
     if dropout_rate > 0:
         fc_layers = nn.Sequential(
             collections.OrderedDict(
@@ -59,7 +56,6 @@ def build_multi_layers(layers, use_batch_norm=True, dropout_rate = 0.1 ):
 
 
 class Encoder(nn.Module):
-    
     ## for one modulity
     def __init__(self, layer, hidden, Z_DIMS, dropout_rate = 0.1):
         super(Encoder, self).__init__()
@@ -93,7 +89,6 @@ class Encoder(nn.Module):
         return mean_x, logvar_x, latent
 
 class Decoder_ZINB(nn.Module):
-    
     ### for scRNA-seq
     
     def __init__(self, layer, hidden, input_size, dropout_rate = 0.1):
@@ -155,63 +150,6 @@ class Decoder_NB(nn.Module):
         return dict( normalized      =  normalized_x,
                      disperation     =  disper_x,
                      imputation      =  recon_final
-                   )
-        
-class Decoder_logNorm_ZINB(nn.Module):
-    
-    ### for scRNA-seq, refered by DCA
-    
-    def __init__(self, layer, hidden, input_size):
-        
-        super(Decoder_logNorm_ZINB, self).__init__()
-
-        self.decoder =  build_multi_layers( layers = layer )
-        
-        self.decoder_scale = nn.Linear(hidden, input_size)
-        self.decoder_r = nn.Linear(hidden, input_size)
-        self.dropout = nn.Linear(hidden, input_size)
-
-    def forward( self, z = None, scale_factor = 1.0 ):
-        
-        latent = self.decoder(z)
-        
-        normalized_x = torch.exp( self.decoder_scale( latent ) ) ## mean gamma
-        scale_x = normalized_x * scale_factor ### 
-
-        disper_x = torch.exp( self.decoder_r( latent ) )  ### theta
-        dropout_rate = F.sigmoid(self.dropout(latent)) 
-        
-        return dict( normalized      =  normalized_x,
-                     disperation     =  disper_x,
-                     dropoutrate     =  dropout_rate,
-                     scale_x         =  scale_x
-                   )
-        
-class Decoder_logNorm_NB(nn.Module):
-    
-    ### for scRNA-seq
-    
-    def __init__(self, layer, hidden, input_size):
-        
-        super(Decoder_logNorm_NB, self).__init__()
-
-        self.decoder =  build_multi_layers( layers = layer )
-        
-        self.decoder_scale = nn.Linear(hidden, input_size)
-        self.decoder_r = nn.Linear(hidden, input_size)
-
-    def forward(self, z, scale_factor = 1.0):
-        
-        latent = self.decoder(z)
-        
-        normalized_x = torch.exp( self.decoder_scale( latent ) ) ## mean gamma
-        scale_x = normalized_x * scale_factor
-        
-        disper_x = F.softplus( self.decoder_r( latent ) ) ### theta
-        
-        return dict( normalized      =  normalized_x,
-                     disperation     =  disper_x,
-                     scale_x         =  scale_x,
                    )
 
 class Decoder(nn.Module):

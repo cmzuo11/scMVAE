@@ -1,8 +1,6 @@
-#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
 Created on Tue Oct 29 19:29:04 2019
-
 @author: chunmanzuo
 """
 
@@ -196,15 +194,6 @@ def normalize( adata, filter_min_counts = True, size_factors = False,
 
 	return adata
 
-def Normalized_0_1 (Data):
-	## here ,Data is cell * genes
-
-	adata = sc.AnnData( Data )
-	sc.pp.normalize_per_cell( adata, counts_per_cell_after=1,
-							  key_n_counts='n_counts2' ) 
-
-	return adata
-
 def calculate_ARI( File1, File2 ):
 	
 	### here File1 is the cell info, File2 is the predited group
@@ -284,19 +273,11 @@ def save_checkpoint(state, folder='./saved_model/', filename='model_best.pth.tar
 	torch.save(state, os.path.join(folder, filename))
 
 
-def load_checkpoint(file_path, model, use_cuda=False):
+def load_checkpoint(file_path, model, device):
 
-	if use_cuda:
+	checkpoint = torch.load(file_path)
+	model.load_state_dict(checkpoint['model_state_dict'])
 
-		device = torch.device("cuda")
-		checkpoint = torch.load(file_path)
-		model.load_state_dict(checkpoint['model_state_dict'])
-		model.to(device)
-		
-	else:
-
-		device = torch.device('cpu')
-		checkpoint = torch.load(file_path, map_location=device)
-		model.load_state_dict(checkpoint['model_state_dict'])
+	model.to(device)
 
 	return model

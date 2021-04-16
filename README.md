@@ -44,4 +44,4 @@ the output file will be saved for further analysis:
 
 # Citation
 
-Chunman Zuo, Luonan Chen. Deep-joint-learning analysis model of single cell transcriptome and open chromatin accessibility data. Briefings in Bioinformatics. 2020. [pdf](https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbaa287/5985290)
+Chunman Zuo, Luonan Chen. Deep-joint-learning analysis model of single cell transcriptome and open chromatin accessibility data. Briefings in Bioinformatics. 2020.  [pdf](https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbaa287/5985290)

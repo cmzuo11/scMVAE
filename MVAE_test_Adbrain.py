@@ -18,8 +18,8 @@ from sklearn import metrics
 from sklearn.metrics import cohen_kappa_score
 from tqdm import trange
 
-from utilities import read_dataset, normalize, calculate_log_library_size, parameter_setting, save_checkpoint, load_checkpoint, adjust_learning_rate
-from MVAE_model import scMVAE_Concat, scMVAE_NN, scMVAE_POE
+from scMVAE.utilities import read_dataset, normalize, calculate_log_library_size, parameter_setting, save_checkpoint, load_checkpoint, adjust_learning_rate
+from scMVAE.MVAE_model import scMVAE_Concat, scMVAE_NN, scMVAE_POE
 
 
 def train(args, adata, adata1, model, train_index, test_index, lib_mean, lib_var, lib_mean1, lib_var1, real_groups, 
@@ -236,11 +236,11 @@ def train_with_argas( args ):
 		                  hidden_5        = 1024, 
 		                  drop_rate       = 0.1, 
 		                  log_variational = True,
-					      Type            = "ZINB", 
-					      device          = device, 
-					      n_centroids     = 22, 
-					      penality        = "GMM",
-					      model           = 1,  )
+			          Type            = "ZINB", 
+			          device          = device, 
+				  n_centroids     = 22, 
+				  penality        = "GMM",
+				  model           = 1,  )
 
 	args.lr           = 0.001
 	args.anneal_epoch = 200

@@ -17,6 +17,31 @@ scMVAE is implemented in the Pytorch framework. Please run scMVAE on CUDA if pos
 
 the detailed usage for using scMVAE-PoE model, please check the 'MVAE_test_Adbrain.py'
 
+# Quick start
+
+## Input: 
+
+* the raw count data of scRNA-seq and scATAC data (gene activity format). 
+
+* Row indicates variable (genes and loci), and column indicates sample (cell).
+
+## Run: 
+
+* python MVAE_test_Adbrain.py
+
+## Output:
+
+the output file will be saved for further analysis:
+
+* model_DCCA.pth.tar: saved model for reproducing results.
+
+* '_latent.csv': latent features (joint-learning space) for scRNA-seq data for clustering and visulization.
+
+* '_scRNA_norm.csv': normalized data for the scRNA-seq data.
+
+* '_scATAC_norm.csv': normalized data for the scATAC-seq data.
+
+
 # Citation
 
-Chunman Zuo, Luonan Chen. Deep-joint-learning analysis model of single cell transcriptome and open chromatin accessibility data. Briefings in Bioinformatics. 2020.(accept)
+Chunman Zuo, Luonan Chen. Deep-joint-learning analysis model of single cell transcriptome and open chromatin accessibility data. Briefings in Bioinformatics. 2020.[pdf](https://academic.oup.com/bib/advance-article/doi/10.1093/bib/bbaa287/5985290)

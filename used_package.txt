@@ -1,0 +1,7 @@
+numpy>=1.19.2
+pandas>=1.1.5
+scipy>=1.5.2
+scikit-learn>=0.23.2
+torch>=1.6.0
+tqdm>=4.55.0
+scanpy>=1.6.0

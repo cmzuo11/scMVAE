@@ -29,7 +29,7 @@ def train(args, adata, adata1, model, train_index, test_index, lib_mean, lib_var
 											  torch.from_numpy( lib_mean[train_index] ), 
 											  torch.from_numpy( lib_var[train_index] ),
 											  torch.from_numpy( lib_mean1[train_index] ), 
-											  torch.from_numpy( lib_mean1[train_index] ),
+											  torch.from_numpy( lib_var1[train_index] ),
 											  torch.from_numpy( adata1.raw[train_index].X ))
 	train_loader  = data_utils.DataLoader( train, batch_size = args.batch_size, shuffle = True )
 

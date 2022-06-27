@@ -369,7 +369,7 @@ class scMVAE_NN(nn.Module):
 			mean_l2          =  result["mean_l2"]
 			logvar_l2        =  result["logvar_l2"]
 			kl_divergence_l2 =  kl( Normal(mean_l2, logvar_l2),
-									Normal(local_l_mean,torch.sqrt(local_l_var))).sum(dim=1)
+									Normal(local_l_mean1,torch.sqrt(local_l_var1))).sum(dim=1)
 		else:
 			kl_divergence_l2 = torch.tensor(0.0)
 
@@ -676,7 +676,7 @@ class scMVAE_POE(nn.Module):
 				mean_l2           =  result["mean_l2"]
 				logvar_l2         =  result["library2"]
 				kl_divergence_l2  = kl( Normal(mean_l2, logvar_l2),
-										Normal(local_l_mean,torch.sqrt(local_l_var))).sum(dim=1)
+										Normal(local_l_mean1,torch.sqrt(local_l_var1))).sum(dim=1)
 			else:
 				kl_divergence_l2 = torch.tensor(0.0)
 		else:
